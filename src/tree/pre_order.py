@@ -1,8 +1,4 @@
-class TreeNode:
-    def __init__(self, x):
-        self.val = x
-        self.left = None
-        self.right = None
+from src.tree.tree_node import TreeNode
 
 
 def preorder_traversal(root):
@@ -26,13 +22,3 @@ def preorder_traversal(root):
             node_stack.append(node.left)
 
     return result
-
-
-a = TreeNode(1)
-b = TreeNode(2)
-c = TreeNode(3)
-
-a.right = b
-b.left = c
-
-print(preorder_traversal(a))

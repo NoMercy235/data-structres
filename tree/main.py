@@ -1,4 +1,4 @@
-from src.tree import *
+from tree import *
 
 a = TreeNode(1)
 b = TreeNode(2)

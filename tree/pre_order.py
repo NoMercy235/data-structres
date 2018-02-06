@@ -1,4 +1,4 @@
-from src.tree.tree_node import TreeNode
+from tree.tree_node import TreeNode
 
 
 def preorder_traversal(root):

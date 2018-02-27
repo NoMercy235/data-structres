@@ -83,7 +83,7 @@ def palindrom_permutation(string: str):
     return True
 
 
-def one_edit(str1, str2):
+def one_edit(str1: str, str2: str):
     """
     Write a function which checks if two string are 0 or 1 edit away
     :param str1: first string
@@ -107,6 +107,38 @@ def one_edit(str1, str2):
     return True
 
 
+def string_compression(string: str):
+    """
+    Compress a string like so: aabbbcccc -> a2b3c4; aaabc -> a3bc
+    :param string: string to compress
+    :return: str
+    """
+    def char_count(string: str, start_pos: int):
+        c = string[start_pos]
+        pos = start_pos + 1
+        count = 1
+        while pos < len(string):
+            if string[pos] == c:
+                count += 1
+            else:
+                break
+            pos += 1
+        return c, count, pos
+
+    pos = 0
+    final_string = ''
+    has_changed = False
+    while pos < len(string):
+        char, found, tmp_pos = char_count(string, pos)
+        final_string += char + str(found)
+        pos = tmp_pos - 1
+        if found > 1:
+            has_changed = True
+        pos += 1
+
+    return final_string if has_changed else string
+
+
 if __name__ == '__main__':
     print('======================== 1 ===============================')
     print('Not unique (this will not be unique): ' + str(has_unique_chars('this will not be unique')))
@@ -120,8 +152,12 @@ if __name__ == '__main__':
     print('is a palindrome string (Tact CoA): ' + str(palindrom_permutation('Tact Coa')))
     print('is not a palindrom string (This cannot possibly be one): ' + str(palindrom_permutation('This cannot possibly be one')))
 
-    print('======================== 4 ===============================')
+    print('======================== 5 ===============================')
     print('is one edit (pale, ple): ' + str(one_edit('pale', 'ple')))
     print('is one edit (pale, pales): ' + str(one_edit('pale', 'pales')))
     print('is one edit (paleX, pale): ' + str(one_edit('paleX', 'pale')))
     print('is not one edit (pale, bake): ' + str(one_edit('pale', 'bake')))
+
+    print('======================== 6 ===============================')
+    print('string compression (aabcccccaaa): ' + string_compression('aabcccccaaa'))
+    print('string compression (abcd): ' + string_compression('abcd'))

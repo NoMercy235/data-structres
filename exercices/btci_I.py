@@ -1,3 +1,6 @@
+import re
+
+
 def has_unique_chars(string: str):
     """
     Implement an algorithm to determine if a string has all unique characters. What if you cannot use additional data
@@ -55,9 +58,40 @@ def is_permutation(str1, str2):
     return True
 
 
+def palindrom_permutation(string: str):
+    """
+    Given a string, check if it is a permutation of a palindrom string.
+    :param string: the string to check
+    :return: boolean
+    """
+    string = re.sub(r'\W+', '', string.lower())
+
+    chars = dict()
+    for c in string:
+        chars[c] = chars[c] + 1 if c in chars else 1
+
+    almost_not_okey = False
+    for val in chars.values():
+        if val % 2 == 1:
+            if not almost_not_okey:
+                almost_not_okey = True
+            else:
+                return False
+
+    if almost_not_okey:
+        return len(string) % 2 == 1
+    return True
+
+
 if __name__ == '__main__':
+    print('======================== 1 ===============================')
     print('Not unique (this will not be unique): ' + str(has_unique_chars('this will not be unique')))
     print('Unique (this one): ' + str(has_unique_chars('this one')))
 
+    print('======================== 2 ===============================')
     print('is permutation (ana, alina): ' + str(is_permutation('ana', 'alina')))
     print('is not permutation (animal, caramida): ' + str(is_permutation('animal', 'caramida')))
+
+    print('======================== 4 ===============================')
+    print('is a palindrome string (Tact CoA): ' + str(palindrom_permutation('Tact Coa')))
+    print('is not a palindrom string (This cannot possibly be one): ' + str(palindrom_permutation('This cannot possibly be one')))

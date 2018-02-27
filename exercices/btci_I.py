@@ -83,6 +83,30 @@ def palindrom_permutation(string: str):
     return True
 
 
+def one_edit(str1, str2):
+    """
+    Write a function which checks if two string are 0 or 1 edit away
+    :param str1: first string
+    :param str2: second string
+    :return: boolean
+    """
+    chars = dict()
+    for i in range(max(len(str1), len(str2))):
+        if i < len(str1):
+            chars[str1[i]] = True if str1[i] in chars else False
+        if i < len(str2):
+            chars[str2[i]] = True if str2[i] in chars else False
+
+    almost_not_okey = False
+    for val in chars.values():
+        if not val:
+            if not almost_not_okey:
+                almost_not_okey = True
+            else:
+                return False
+    return True
+
+
 if __name__ == '__main__':
     print('======================== 1 ===============================')
     print('Not unique (this will not be unique): ' + str(has_unique_chars('this will not be unique')))
@@ -95,3 +119,9 @@ if __name__ == '__main__':
     print('======================== 4 ===============================')
     print('is a palindrome string (Tact CoA): ' + str(palindrom_permutation('Tact Coa')))
     print('is not a palindrom string (This cannot possibly be one): ' + str(palindrom_permutation('This cannot possibly be one')))
+
+    print('======================== 4 ===============================')
+    print('is one edit (pale, ple): ' + str(one_edit('pale', 'ple')))
+    print('is one edit (pale, pales): ' + str(one_edit('pale', 'pales')))
+    print('is one edit (paleX, pale): ' + str(one_edit('paleX', 'pale')))
+    print('is not one edit (pale, bake): ' + str(one_edit('pale', 'bake')))

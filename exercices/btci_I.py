@@ -139,6 +139,25 @@ def string_compression(string: str):
     return final_string if has_changed else string
 
 
+def zero_matrix(matrix):
+    """
+    If an element is 0, its entire row and column will be 0
+    :param matrix: the matrix to check
+    :return: int[][] result matrix
+    """
+    cols = []
+    for row in range(0, len(matrix)):
+        for col in range(0, len(matrix[row])):
+            if matrix[row][col] == 0:
+                cols.append(col)
+                matrix[row] = [0 for _ in range(0, len(matrix[row]))]
+                break
+    for col in cols:
+        for row in range(0, len(matrix)):
+            matrix[row][col] = 0
+    return matrix
+
+
 if __name__ == '__main__':
     print('======================== 1 ===============================')
     print('Not unique (this will not be unique): ' + str(has_unique_chars('this will not be unique')))
@@ -161,3 +180,9 @@ if __name__ == '__main__':
     print('======================== 6 ===============================')
     print('string compression (aabcccccaaa): ' + string_compression('aabcccccaaa'))
     print('string compression (abcd): ' + string_compression('abcd'))
+
+    print('======================== 8 ===============================')
+    print('zero matrix ([[1, 2, 3], [4, 0, 6], [7, 8, 9]]): ')
+    print(zero_matrix([[1, 2, 3], [4, 0, 6], [7, 8, 9]]))
+    print('zero matrix ([[0, 2, 3, 4], [4, 5, 6, 7], [7, 8, 9, 0]]): ')
+    print(zero_matrix([[0, 2, 3, 4], [4, 5, 6, 7], [7, 8, 9, 0]]))

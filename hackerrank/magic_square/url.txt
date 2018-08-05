@@ -1,0 +1,3 @@
+https://www.hackerrank.com/challenges/magic-square-forming/problem
+
+Not working as the url intends to. Diagonal sum on the array is not correct.
